@@ -4,7 +4,7 @@ Adam Tucker
 
 ## Task
 
-Use a random number generator which generates a random number \( [1-5] \) to
+Use a random number generator which generates a random number \\( [1-5] \\) to
 output a random number \( [1-7] \). You may not alter the original random number generator.
 You may trust its output as being truly random, in the range \( [1-5] \).
 
