@@ -16,6 +16,7 @@ $(document).ready(function() {
             deferred.resolve();
             $(".mdblock[run='init']").each(calculate_block);
             deferred.done(calculate);
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
             $(':input').change(function() {
                 calculate();
             });

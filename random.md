@@ -4,14 +4,16 @@ Adam Tucker
 
 ## Task
 
-Use a random number generator which generates a random number \( [1-5] \) to
-output a random number \( [1-7] \). You may not alter the original random number generator.
-You may trust its output as being truly random, in the range \( [1-5] \).
+Use a random number generator which generates a random number \\( [1-5] \\) to
+output a random number \\( [1-7] \\). You may not alter the original random number generator.
+You may trust its output as being truly random, in the range \\( [1-5] \\).
+
+$$ \textrm{Random}[1-5] \Rightarrow \textrm{Random}[1-7] $$
 
 ## Original Strategy
 
 My original strategy was to run the random number generator many times, using a
-cumulative sum, to achieve a random number whose maximum value was \( 5 \times 7 \).
+cumulative sum, to achieve a random number whose maximum value was \\( 5 \times 7 \\).
 
 ```
 var sum = 0;
@@ -23,12 +25,12 @@ for( var i = 0; i < 7; i++)
 Console.Write(sum);
 ```
 
-This strategy is technically able of returning values in the range \( [1-7] \), but the distribution
+This strategy is technically able of returning values in the range \\( [1-7] \\), but the distribution
 of values is not even across all potential results.
 
 ### Results
 
-After running \( k \) times, the distribution of results is shown below:
+After running \\( k \\) times, the distribution of results is shown below:
 
 ```yaml
         #:  name=v
@@ -80,20 +82,20 @@ reason that rolling a 12-sided die does not yield the same result as rolling 2
 
 ## Revised Strategy
 Instead, we have to use some other mechanism to "stretch" our random range from
-\( [1-5] \) to \( [1-7] \).
+\\( [1-5] \\) to \\( [1-7] \\).
 
 A better way than *cumulative sum* to stretch the range of a random number generator
 is to use *multiplication* instead. Where *cumulative sum* will naturally raise the
 lowest possible value, *multiplication* will not.
 
-However, we are only able to multiply together multiple instances of \( [1-5] \).
-Therefore, our only possible ranges are \( [1-5^n] \).
+However, we are only able to multiply together multiple instances of \\( [1-5] \\).
+Therefore, our only possible ranges are \\( [1-5^n] \\).
 
-One strategy we may use is to create a random number generator for \( [1-25] \),
-filling in numbers \( [1-7] \) an even number of times, and filling the remaining
-positions with zeros. In this way, we can generate 2 random numbers \( [1-5] \),
-multiply them together, then determine the whether we land on a number \( [1-7] \)
-in our map. If we instead land on a \( 0 \), we simply repeat the procedure until
+One strategy we may use is to create a random number generator for \\( [1-25] \\),
+filling in numbers \\( [1-7] \\) an even number of times, and filling the remaining
+positions with zeros. In this way, we can generate 2 random numbers \\( [1-5] \\),
+multiply them together, then determine the whether we land on a number \\( [1-7] \\)
+in our map. If we instead land on a \\( 0 \\), we simply repeat the procedure until
 we land on a valid result.
 
 ```csharp
@@ -114,8 +116,8 @@ Console.Write(value);
 ```
 
 Technically, this means that the procedure could go on-and-on forever, as there
-is a 16% chance of needing to repeat each time. However, the chance of repeating
-\( n \) times is \( 0.16^n \).
+is a \\( 16\% \\) chance of needing to repeat each time. However, the chance of repeating
+\\( n \\) times is \\( 0.16^n \\).
 
 ### Chance of Long Runtimes
 
@@ -134,7 +136,7 @@ println("Chance of repeating **" + n + "** times: **" + Math.pow(0.16,n) + "**")
 
 ### Results
 
-After running \( k' \) times, the distribution of results is shown below:
+After running \\( k' \\) times, the distribution of results is shown below:
 
 ```yaml
         #:  name=m
